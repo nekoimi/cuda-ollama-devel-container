@@ -17,7 +17,7 @@ RUN set -ex && \
     apt update && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     yes | unminimize && \
-    apt install -y systemd sudo bash-completion zsh git ca-certificates curl vim unzip gcc g++ make htop tcpdump lsof telnet net-tools dnsutils iputils-ping nfs-common && \
+    apt install -y systemd sudo bash-completion zsh git git-lfs ca-certificates curl vim unzip gcc g++ make htop tcpdump lsof telnet net-tools dnsutils iputils-ping nfs-common && \
     git lfs install && \
     systemctl mask systemd-resolved.service && \
     echo "LANG=$LANG" > /etc/default/locale && \
