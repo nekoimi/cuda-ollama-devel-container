@@ -6,5 +6,8 @@ echo "root:$ROOT_PASSWORD" | chpasswd
 ### 启动ssh
 service ssh start
 
+### 启动docker
+service docker start
+
 ### 执行CMD参数
 exec "$@"

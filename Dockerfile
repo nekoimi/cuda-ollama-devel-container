@@ -10,17 +10,13 @@ ENV LANG=en_US.UTF-8
 
 WORKDIR $WORKHOME
 
-COPY entrypoint.sh  /entrypoint.sh
-COPY ollama.service /etc/systemd/system/ollama.service
-
 RUN set -ex && \
     apt update && \
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
     yes | unminimize && \
-    apt install -y sudo bash-completion zsh git git-lfs ca-certificates curl vim unzip gcc g++ make htop tcpdump lsof telnet net-tools dnsutils iputils-ping nfs-common && \
+    apt install -y language-pack-en sudo bash-completion zsh git git-lfs ca-certificates curl vim unzip gcc g++ make htop tcpdump lsof telnet net-tools dnsutils iputils-ping nfs-common && \
     git lfs install && \
-    echo "LANG=$LANG" > /etc/default/locale && \
-    chmod +x /entrypoint.sh
+    echo "LANG=$LANG" > /etc/default/locale
 
 ## 安装ssh
 RUN set -ex && \
@@ -45,11 +41,15 @@ RUN set -ex && \
 
 # 安装ollama
 RUN set -ex && \
-    curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o ollama-linux-amd64.tgz && \
-    tar -C /usr -xzf ollama-linux-amd64.tgz && \
+    curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o /tmp/ollama-linux-amd64.tgz && \
+    tar -C /usr -xzf /tmp/ollama-linux-amd64.tgz && \
     useradd -r -s /bin/false -U -m -d /usr/share/ollama ollama && \
     usermod -a -G ollama $(whoami) && \
     ollama -v
+
+COPY entrypoint.sh  /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh && rm -rf /tmp/*
 
 VOLUME $WORKHOME
 
