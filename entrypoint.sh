@@ -4,7 +4,4 @@
 echo "root:$ROOT_PASSWORD" | chpasswd
 
 ### 启动ssh
-service sshd start
-
-### 启动docker
-service docker start
+service ssh start
