@@ -28,8 +28,7 @@ RUN set -ex && \
     apt install -y openssh-server && \
     sed -i 's@#Port 22@Port 22@g' /etc/ssh/sshd_config && \
     sed -i 's@#ListenAddress 0.0.0.0@ListenAddress 0.0.0.0@g' /etc/ssh/sshd_config && \
-    sed -i 's@#PermitRootLogin prohibit-password@PermitRootLogin yes@g' /etc/ssh/sshd_config && \
-    systemctl enable sshd
+    sed -i 's@#PermitRootLogin prohibit-password@PermitRootLogin yes@g' /etc/ssh/sshd_config
 
 # 安装docker
 RUN set -ex && \
