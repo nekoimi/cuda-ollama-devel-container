@@ -61,4 +61,4 @@ EXPOSE 22 11434
 # 初始化
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["systemd"]
+#CMD ["systemd"]
