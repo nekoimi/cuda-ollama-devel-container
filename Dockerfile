@@ -45,8 +45,8 @@ RUN set -ex && \
     ollama -v && \
       \
     # 安装LLaMA-Factory
-    apt install pip && \
-    git clone --depth 1 https://github.com/hiyouga/LLaMA-Factory.git /opt/LLaMA-Factory && \
+    apt install -y pip && \
+    cd /opt && git clone --depth 1 https://github.com/hiyouga/LLaMA-Factory.git LLaMA-Factory && \
     # 清理垃圾 减小体积
     apt clean -y && \
         rm -rf /var/lib/apt/lists/* && \
